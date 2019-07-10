@@ -1,132 +1,96 @@
 
-        // This function returns a randomized computer move of rock, paper, or scissors
-        function computerPlay() {
-            var compMove = Array('Rock','Paper','Scissors')
-            return compMove[Math.floor(Math.random()*compMove.length)]
-        }
+// This function returns a randomized computer move of rock, paper, or scissors
+function computerPlay() {
+    var compMove = Array('Rock','Paper','Scissors')
+    return compMove[Math.floor(Math.random()*compMove.length)]
+}
 
-        // This function plays one round and compares the player's move to the computer's move
-        function playRound(playerSelection, computerSelection) {
-            var player = playerSelection.toUpperCase()
-            var computer = computerSelection.toUpperCase()
+var playerScore = 0
+var computerScore = 0
+var currentRound = 1
 
-            const rock = "ROCK"
-            const paper = "PAPER"
-            const scissors = "SCISSORS"
+// This function plays one round and compares the player's move to the computer's move
+function playRound(playerSelection, computerSelection) {
+    var player = playerSelection.toUpperCase()
+    var computer = computerSelection.toUpperCase()
 
-            var win = ("You win! " + playerSelection + " beats " + computerSelection)
-            var lose = ("You lose! " + computerSelection + " beats " + playerSelection)
+    const rock = "ROCK"
+    const paper = "PAPER"
+    const scissors = "SCISSORS"
 
-            if (player === computer) {
-                return ("It's a tie!")
-            }
-            else if (player == rock && computer == paper) {
-                computerScore++
-                return lose
-            }
-            else if (player == rock && computer == scissors) {
-                playerScore++
-                return win
-            }
-            else if (player == paper && computer == scissors) {
-                computerScore++
-                return lose
-            }
-            else if (player == paper && computer == rock) {
-                playerScore++
-                return win
-            }
-            else if (player == scissors && computer == rock) {
-                computerScore++
-                return lose
-            }
-            else { //if (player == scissors && computer == paper)
-                playerScore++
-                return win
-            }
-        }
+    var win = ("You win! " + playerSelection + " beats " + computerSelection)
+    var lose = ("You lose! " + computerSelection + " beats " + playerSelection)
 
-        var playerScore = 0
-        var computerScore = 0
-        var currentRound = 1
+    if (player === computer) {
+        return ("It's a tie!")
+    }
+    else if ((player == rock && computer == paper) || (player == paper && computer == scissors) || (player == scissors && computer == rock)) {
+        computerScore++
+        return lose
+    }
+    else { //if ((player == rock && computer == scissors) || (player == paper && computer == rock) || (player == scissors && computer == paper))
+        playerScore++
+        return win
+    }
+}
 
-        const displayResults = document.querySelector('#displayResults')
-        const resultsContainer = document.createElement('div')
-        resultsContainer.classList.add('resultsContainer')
+// ------------------------------------------------------------------------------------
+function rockFunction() {
+    var playerSelection = 'Rock'
+    var computerSelection = computerPlay()
+    resultsContainer.textContent = playRound(playerSelection, computerSelection)
+    currentScore.textContent = updateScore()
 
-        function rockFunction() {
-            var playerSelection = 'rock'
-            var computerSelection = computerPlay()
-            resultsContainer.textContent = playRound(playerSelection, computerSelection)
+}
 
-        }
+function paperFunction() {
+    var playerSelection = 'Paper'
+    var computerSelection = computerPlay()
+    resultsContainer.textContent = playRound(playerSelection, computerSelection)
+    currentScore.textContent = updateScore()
+}
 
-        function paperFunction() {
-            var playerSelection = 'paper'
-            var computerSelection = computerPlay()
-            resultsContainer.textContent = playRound(playerSelection, computerSelection)
-        }
+function scissorFunction() {
+    var playerSelection = 'Scissors'
+    var computerSelection = computerPlay()
+    resultsContainer.textContent = playRound(playerSelection, computerSelection)
+    currentScore.textContent = updateScore()
+}
 
-        function scissorFunction() {
-            var playerSelection = 'scissor'
-            var computerSelection = computerPlay()
-            resultsContainer.textContent = playRound(playerSelection, computerSelection)
-        }
+var rockBtn = document.querySelector('#rockID')
+rockBtn.addEventListener('click', rockFunction)
 
-        var rockBtn = document.querySelector('#rockID')
-        rockBtn.addEventListener('click', rockFunction)
+var paperBtn = document.querySelector('#paperID')
+paperBtn.addEventListener('click', paperFunction)
 
-        var paperBtn = document.querySelector('#paperID')
-        paperBtn.addEventListener('click', paperFunction)
+var scissorBtn = document.querySelector('#scissorID')
+scissorBtn.addEventListener('click', scissorFunction)
 
-        var scissorBtn = document.querySelector('#scissorID')
-        scissorBtn.addEventListener('click', scissorFunction)
+const displayResults = document.querySelector('#displayResults')
+const resultsContainer = document.createElement('div')
+resultsContainer.classList.add('resultsContainer')
 
-        displayResults.appendChild(resultsContainer)
+displayResults.appendChild(resultsContainer)
 
-/* ---------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------
+function updateScore() {
+    if (playerScore == 5) {
+        const playerWin = document.createElement('div')
+        playerWin.classList.add('playerWin')
+        playerWin.textContent = "Game Over! You win!"
+        displayResults.appendChild(playerWin)
+    }
+    if (computerScore == 5) {
+        const computerWin = document.createElement('div')
+        computerWin.classList.add('computerWin')
+        computerWin.textContent = "Game Over! Computer wins!"
+        displayResults.appendChild(computerWin)
+    }
 
-        // This function plays five rounds and keeps score
-        function game() {
-            for(i = 0; i < 5; i++) {
-                //console.log("Round " + currentRound)
-                var computerSelection = computerPlay()
-                let userInput = prompt("Rock, paper, or scissors?")
-                var playerSelection = userInput
-                console.log("Round " + currentRound)
-                console.log(playRound(playerSelection, computerSelection))
-                console.log("The current score is " + playerScore + "-" + computerScore)
-                currentRound++
-            }
-            if (playerScore > computerScore) {
-                console.log("You, the player, win!")
-            }
-            else if (playerScore < computerScore) {
-                console.log("The computer wins!")
-            }
-            else {
-                console.log("It's a tie!")
-            }
-            // Reset the counters for a new game (if restart is implemented)
-            playerScore = 0
-            computerScore = 0
-            currentRound = 1
+    return (playerScore + "-" + computerScore)
+}
 
-            restartGame()
-        }
+const currentScore = document.createElement('div')
+currentScore.classList.add('currentScore')
 
-        // Function that prompts the user if they want to play another game of rock-paper-scissors
-        function restartGame() {
-            let restart = prompt("Play another game?(y/n)")
-            if (restart == 'y') {
-                game()
-            }
-            else if (restart == 'n') {
-                return
-            }
-            else {
-                console.log("Please enter y or n")
-                restartGame()
-            }
-        }
-   ---------------------------------------------------------------------------------------- */
+displayResults.appendChild(currentScore)
