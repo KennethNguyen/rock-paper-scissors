@@ -7,7 +7,6 @@ function computerPlay() {
 
 var playerScore = 0
 var computerScore = 0
-var currentRound = 1
 
 // This function plays one round and compares the player's move to the computer's move
 function playRound(playerSelection, computerSelection) {
@@ -66,7 +65,7 @@ paperBtn.addEventListener('click', paperFunction)
 var scissorBtn = document.querySelector('#scissorID')
 scissorBtn.addEventListener('click', scissorFunction)
 
-const displayResults = document.querySelector('#displayResults')
+const displayResults = document.querySelector('.displayResults')
 const resultsContainer = document.createElement('div')
 resultsContainer.classList.add('resultsContainer')
 
@@ -79,12 +78,14 @@ function updateScore() {
         playerWin.classList.add('playerWin')
         playerWin.textContent = "Game Over! You win!"
         displayResults.appendChild(playerWin)
+        restartGame()
     }
     if (computerScore == 5) {
         const computerWin = document.createElement('div')
         computerWin.classList.add('computerWin')
         computerWin.textContent = "Game Over! Computer wins!"
         displayResults.appendChild(computerWin)
+        restartGame()
     }
 
     return (playerScore + "-" + computerScore)
@@ -94,3 +95,24 @@ const currentScore = document.createElement('div')
 currentScore.classList.add('currentScore')
 
 displayResults.appendChild(currentScore)
+
+// -------------------------------------------------------------------------------------
+function restartGame() {
+    const restartGame = document.querySelector('.restartGame')
+    const restartPrompt = document.createElement('div')
+    restartPrompt.textContent = "Do you want to play again?"
+
+    restartGame.appendChild(restartPrompt)
+
+    const restartButton = document.createElement('button')
+    restartButton.id = "restartID"
+    restartButton.innerHTML = "Restart"
+    restartButton.addEventListener('click', setRestart)
+
+    restartGame.appendChild(restartButton)
+}
+
+function setRestart() {
+    playerScore = 0
+    computerScore = 0
+}
