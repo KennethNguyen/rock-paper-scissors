@@ -99,7 +99,7 @@ displayResults.appendChild(currentScore)
 // -------------------------------------------------------------------------------------
 function restartGame() {
     const restartGame = document.querySelector('.restartGame')
-    const restartPrompt = document.createElement('div')
+    const restartPrompt = document.createElement('p')
     restartPrompt.textContent = "Do you want to play again?"
 
     restartGame.appendChild(restartPrompt)
@@ -115,4 +115,5 @@ function restartGame() {
 function setRestart() {
     playerScore = 0
     computerScore = 0
+    window.location.reload(false)
 }

@@ -1,0 +1,50 @@
+body {
+    background: tan;
+    margin: 0px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.introduction, img {
+    display: inline-block;
+    margin: 8px;
+}
+
+.introduction {
+    height: 250px;
+    font-size: 18px;
+}
+
+img {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    vertical-align: bottom;
+}
+
+button {
+    font-size: 24px;
+    background-color: black;
+    color: yellow;
+    padding: 8px;
+    margin: 10px;
+}
+
+.displayResults {
+    background-color: white;
+    width: 250px;
+    height:60px;
+    margin: 8px;
+}
+
+footer {;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    border-width: 2px;
+    border-style: solid none;
+    border-bottom: black;
+}

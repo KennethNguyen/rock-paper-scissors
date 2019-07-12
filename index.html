@@ -1,100 +1,38 @@
 <!DOCTYPE html>
-<html>
-    <script>
-        // This function returns a randomized computer move of rock, paper, or scissors 
-        function computerPlay() {
-            var compMove = Array('Rock','Paper','Scissors')
-            return compMove[Math.floor(Math.random()*compMove.length)]
-        }
+<html lang ="en">
+    <head>
+        <meta charset="utf-8"/>
+        <link href="style.css" type="text/css" rel="stylesheet">
+        <title>Rock, Paper, Scissors</title>
+    </head>
+
+    <body>
+        <h1 class="pageTitle">Rock, Paper, Scissors</h1>
+        <div class="introduction">
+            <h3 class="pageDescription">In this game, you will be facing an AI. 
+            <h4 class="rules">Rules are as follow:</h4>
+                <ul>
+                    <li>First to five points wins the game!</li>
+                    <li>You only get a point if you win. No points allocated in a tie.</li>
+                    <li>Rock beats Scissors, Scissors beats Paper, Paper beats Rock </li>
+                </ul>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Rock-paper-scissors.svg" alt="Visual of the rock-paper-scissor hierarchy"/>
         
-        // This function plays one round and compares the player's move to the computer's move
-        function playRound(playerSelection, computerSelection) {
-            var player = playerSelection.toUpperCase()
-            var computer = computerSelection.toUpperCase()
-            
-            const rock = "ROCK"
-            const paper = "PAPER"
-            const scissors = "SCISSORS"
-            
-            var win = ("You win! " + playerSelection + " beats " + computerSelection)
-            var lose = ("You lose! " + computerSelection + " beats " + playerSelection) 
+        <div class="playerOptions">
+            <button id="rockID">Rock</button>    
+            <button id="paperID">Paper</button>    
+            <button id="scissorID">Scissors</button>
+        </div>
 
-            if (player === computer) {
-                return ("It's a tie!")
-            }
-            else if (player == rock && computer == paper) {
-                computerScore++
-                return lose 
-            }
-            else if (player == rock && computer == scissors) {
-                playerScore++
-                return win
-            }
-            else if (player == paper && computer == scissors) {
-                computerScore++
-                return lose
-            }
-            else if (player == paper && computer == rock) {
-                playerScore++
-                return win
-            }
-            else if (player == scissors && computer == rock) {
-                computerScore++
-                return lose
-            }
-            else { //if (player == scissors && computer == paper) 
-                playerScore++
-                return win    
-            } 
-        }
+        <div class="displayResults"></div>
+        
+        <div class="restartGame"></div>
+        <footer>
+            <p>Hi there! Hope you enjoyed this game! If you want to see more of my work, check out my <a href="https://github.com/KennethNguyen">github</a>!</p> 
+            <p>-Kenneth Nguyen</p>
+        </footer>
+    </body>
 
-        var playerScore = 0
-        var computerScore = 0
-        var currentRound = 1
-
-        // This function plays five rounds and keeps score
-        function game() {
-            for(i = 0; i < 5; i++) {
-                //console.log("Round " + currentRound)
-                var computerSelection = computerPlay()
-                let userInput = prompt("Rock, paper, or scissors?")
-                var playerSelection = userInput
-                console.log("Round " + currentRound)
-                console.log(playRound(playerSelection, computerSelection))
-                console.log("The current score is " + playerScore + "-" + computerScore)
-                currentRound++
-            }
-            if (playerScore > computerScore) {
-                console.log("You, the player, win!")
-            }
-            else if (playerScore < computerScore) {
-                console.log("The computer wins!")
-            }
-            else {
-                console.log("It's a tie!")
-            }
-            // Reset the counters for a new game (if restart is implemented)
-            playerScore = 0
-            computerScore = 0
-            currentRound = 1
-
-            restartGame()
-        }
-
-        // Function that prompts the user if they want to play another game of rock-paper-scissors
-        function restartGame() {
-            let restart = prompt("Play another game?(y/n)")
-            if (restart == 'y') {
-                game()
-            }
-            else if (restart == 'n') {
-                return
-            }
-            else {
-                console.log("Please enter y or n")
-                restartGame()
-            }
-        }
-
-    </script>
+    <script src="gameLogic.js"></script>
 </html>
