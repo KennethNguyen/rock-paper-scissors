@@ -7,12 +7,30 @@
     </head>
 
     <body>
-        <h1>Rock, Paper, Scissors</h1>
+        <h1 class="pageTitle">Rock, Paper, Scissors</h1>
+        <div class="introduction">
+            <h3 class="pageDescription">In this game, you will be facing an AI. 
+            <h4 class="rules">Rules are as follow:</h4>
+                <ul>
+                    <li>First to five points wins the game!</li>
+                    <li>You only get a point if you win. No points allocated in a tie.</li>
+                    <li>Rock beats Scissors, Scissors beats Paper, Paper beats Rock </li>
+                </ul>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Rock-paper-scissors.svg" alt="Visual of the rock-paper-scissor hierarchy"/>
+
         <button id="rockID">Rock</button>    
         <button id="paperID">Paper</button>    
         <button id="scissorID">Scissors</button>
 
-        <div id="displayResults"></div>
+        <div class="displayResults"></div>
+        
+        <div class="restartGame"></div>
+        <footer>
+            <p>Hi there! Hope you enjoyed this game! If you want to see more of my work, check out my <a href="https://github.com/KennethNguyen">github</a>!</p> 
+            <p>-Kenneth Nguyen</p>
+        </footer>
     </body>
+
     <script src="gameLogic.js"></script>
 </html>
