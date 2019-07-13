@@ -1,6 +1,7 @@
 body {
     background: tan;
     margin: 0px;
+    text-align: center;
 }
 
 h1 {
@@ -33,10 +34,17 @@ button {
 }
 
 .displayResults {
-    background-color: white;
-    width: 250px;
-    height:60px;
-    margin: 8px;
+    background-color: beige;
+    width: 270px;
+    height: 80px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.restartGame {
+    font-size: 18px;
 }
 
 footer {;

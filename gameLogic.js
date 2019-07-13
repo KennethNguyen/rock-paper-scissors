@@ -5,6 +5,7 @@ function computerPlay() {
     return compMove[Math.floor(Math.random()*compMove.length)]
 }
 
+// Global variables to keep track of player's current score and computer's current score
 var playerScore = 0
 var computerScore = 0
 
@@ -33,7 +34,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// ------------------------------------------------------------------------------------
+// Functions to execute a round depending on the player choice and print out the result
 function rockFunction() {
     var playerSelection = 'Rock'
     var computerSelection = computerPlay()
@@ -56,6 +57,7 @@ function scissorFunction() {
     currentScore.textContent = updateScore()
 }
 
+// Add an onclick event to each button that starts a round depending on the option the player chose
 var rockBtn = document.querySelector('#rockID')
 rockBtn.addEventListener('click', rockFunction)
 
@@ -65,38 +67,42 @@ paperBtn.addEventListener('click', paperFunction)
 var scissorBtn = document.querySelector('#scissorID')
 scissorBtn.addEventListener('click', scissorFunction)
 
+// Create a new div container to hold the result of each round
 const displayResults = document.querySelector('.displayResults')
 const resultsContainer = document.createElement('div')
 resultsContainer.classList.add('resultsContainer')
 
 displayResults.appendChild(resultsContainer)
 
-// --------------------------------------------------------------------------------------
+// Updates the score, prints winner of game, and allows player restart option
 function updateScore() {
     if (playerScore == 5) {
-        const playerWin = document.createElement('div')
+        const playerWin = document.createElement('p')
         playerWin.classList.add('playerWin')
         playerWin.textContent = "Game Over! You win!"
         displayResults.appendChild(playerWin)
+        disableOptions()
         restartGame()
     }
     if (computerScore == 5) {
-        const computerWin = document.createElement('div')
+        const computerWin = document.createElement('p')
         computerWin.classList.add('computerWin')
         computerWin.textContent = "Game Over! Computer wins!"
         displayResults.appendChild(computerWin)
+        disableOptions()
         restartGame()
     }
 
     return (playerScore + "-" + computerScore)
 }
 
+// Create a new div container to hold the current score after each round
 const currentScore = document.createElement('div')
 currentScore.classList.add('currentScore')
 
 displayResults.appendChild(currentScore)
 
-// -------------------------------------------------------------------------------------
+// Creates prompt to restart and a restart button
 function restartGame() {
     const restartGame = document.querySelector('.restartGame')
     const restartPrompt = document.createElement('p')
@@ -112,8 +118,16 @@ function restartGame() {
     restartGame.appendChild(restartButton)
 }
 
+// Resets all scores and reloads game
 function setRestart() {
     playerScore = 0
     computerScore = 0
-    window.location.reload(false)
+    window.location.reload()
+}
+
+// Disables rock-paper-scissor button options when player or computer wins
+function disableOptions() {
+    rockBtn.disabled = true
+    paperBtn.disabled = true
+    scissorBtn.disabled = true
 }
